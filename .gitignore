@@ -1,0 +1,4 @@
+results/**/**/points.csv
+results/**/**/new_points.csv
+.idea
+.ipynb_checkpoints
