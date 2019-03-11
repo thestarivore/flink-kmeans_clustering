@@ -18,6 +18,7 @@
 
 package org.apache.flink;
 
+import org.apache.flink.api.common.JobExecutionResult;
 import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.functions.ReduceFunction;
@@ -38,6 +39,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Skeleton for a Flink Batch Job.
@@ -96,7 +98,7 @@ public class KMeans {
 
             // recompute the nearest centroids recompnearest times
             if (params.get("recompnearest") != null){
-                int recomputeNearest = params.getInt("recompnearest");
+                int recomputeNearest = params.getInt("recompnearest", 0);
                 LOG.debug("KMEANS: Recomputing nearest centroids: " + recomputeNearest + " times");
                 for (int k = 0; k < recomputeNearest; k++) {
                     double minDistance = Double.MAX_VALUE;
@@ -229,8 +231,12 @@ public class KMeans {
             tPoints.writeAsCsv(pointsOutFile, "\n", ",", FileSystem.WriteMode.OVERWRITE).setParallelism(1);
             tCentroids.writeAsCsv(centroidsOutFile, "\n", ",", FileSystem.WriteMode.OVERWRITE).setParallelism(1);
             objFunctionValue.writeAsCsv(objFunctionOutFile, FileSystem.WriteMode.OVERWRITE).setParallelism(1);
+
             // execute program
-            env.execute("Flink Project");
+            JobExecutionResult result =env.execute("Flink Project");
+            System.out.println("The job took ");
+            System.out.println(result.getNetRuntime(TimeUnit.MILLISECONDS));
+            System.out.println(" ms to execute");
         } else {
             System.out.println("Printing result to stdout.");
             tPoints.print();

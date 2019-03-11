@@ -35,3 +35,6 @@ Example:
 ### Setup Flink cluster
 
 Download flink [here](https://flink.apache.org/downloads.html), follow [this](https://ci.apache.org/projects/flink/flink-docs-release-1.7/tutorials/local_setup.html) to start the cluster and submit the Jar file.
+
+### Run from CLI
+[Here](https://ci.apache.org/projects/flink/flink-docs-stable/ops/cli.html)
