@@ -52,19 +52,17 @@ import java.util.concurrent.TimeUnit;
  * and run 'mvn clean package' on the command line.
  */
 public class KMeans {
-    private static final double EPSILON = 0.1;
-
     public static void main(String[] args) throws Exception {
         Logger LOG = LoggerFactory.getLogger(KMeans.class);
 
         final ParameterTool params = ParameterTool.fromArgs(args);
-        final String pointsInFile = params.get("points");           // (in) file with points
-        final String centroidsInFile = params.get("centroids");     // (in) file with centroids
-        final String pointsOutFile = params.get("pointsout");       // (out) file with points
-        final String centroidsOutFile = params.get("centroidsout"); // (out) file with centroids
-        final String objFunctionOutFile = params.get("objfunout");  // (out) file with objective function value
+        final String pointsInFile       = params.get("points");         // (in) file with points
+        final String centroidsInFile    = params.get("centroids");      // (in) file with centroids
+        final String pointsOutFile      = params.get("pointsout");      // (out) file with points
+        final String centroidsOutFile   = params.get("centroidsout");   // (out) file with centroids
+        final String objFunctionOutFile = params.get("objfunout");      // (out) file with objective function value
 
-        final int maxIterations = params.getInt("iterations", 100);
+        final int maxIterations         = params.getInt("iterations", 100);
         final boolean customConvergence = params.getBoolean("custconvergence", false);
 
         // set up the batch execution environment
@@ -157,7 +155,7 @@ public class KMeans {
          */
         DataSet<Centroid> newCentroids = points
                 // 1st step
-                .map(new ComputeCentroidsDistance())                        // => (CentroidId, Point)
+                .map(new ComputeCentroidsDistance())                        // Point => (CentroidId, Point)
                 .withBroadcastSet(iterationCentroids, "centroids")    // set the centroids shared variable
                 // 2nd step
                 .map(new PointCounterFieldAppend())                         // append the count field to the tuple (init to 1)
@@ -169,7 +167,8 @@ public class KMeans {
         DataSet<Centroid> finalCentroids;
 
         if (customConvergence) { // stop the iteration when the centroids do not move more than EPSILON, or after max iterations
-            LOG.debug("KMEANS: Custom convergence active");
+            final float epsilon = params.getFloat("epsilon");
+            LOG.debug("KMEANS: Custom convergence active with epsilon: " + epsilon);
 
             finalCentroids = iterationCentroids.closeWith(newCentroids,
                     // stop the iteration when the following set is empty
@@ -177,7 +176,7 @@ public class KMeans {
                             .filter(new FilterFunction<Tuple2<Centroid, Centroid>>() {           // filter out centroids that did not move more than EPSILON
                                 @Override
                                 public boolean filter(Tuple2<Centroid, Centroid> tuple) throws Exception {
-                                    return tuple.f0.distance(tuple.f1) > EPSILON;
+                                    return tuple.f0.distance(tuple.f1) > epsilon;
                                 }
                             }));
         } else { // stop the iteration after max iterations
@@ -228,15 +227,17 @@ public class KMeans {
         if (params.has("pointsout") && params.has("centroidsout") && params.has("objfunout")) {
             LOG.debug("KMEANS: Printing to file");
 
+            // write results to files
             tPoints.writeAsCsv(pointsOutFile, "\n", ",", FileSystem.WriteMode.OVERWRITE).setParallelism(1);
             tCentroids.writeAsCsv(centroidsOutFile, "\n", ",", FileSystem.WriteMode.OVERWRITE).setParallelism(1);
             objFunctionValue.writeAsCsv(objFunctionOutFile, FileSystem.WriteMode.OVERWRITE).setParallelism(1);
 
             // execute program
-            JobExecutionResult result =env.execute("Flink Project");
-            System.out.println("The job took ");
+            JobExecutionResult result = env.execute("Flink Project");
+
+            System.out.println("The job took");
             System.out.println(result.getNetRuntime(TimeUnit.MILLISECONDS));
-            System.out.println(" ms to execute");
+            System.out.println("ms to execute");
         } else {
             System.out.println("Printing result to stdout.");
             tPoints.print();

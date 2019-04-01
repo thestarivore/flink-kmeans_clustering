@@ -4,3 +4,4 @@ results/**/**/new_points.csv
 .ipynb_checkpoints
 points_10000000.csv
 points_1000000.csv
+ex_cmd.txt
