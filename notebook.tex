@@ -1,0 +1,1246 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{flink\_k-means}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{apache-flink}{%
+\section{Apache Flink}\label{apache-flink}}
+
+Implement the k-means clustering algorithm in Apache Flink.
+
+Optional: implement the same algorithm in OpenMP/MPI and compare the
+performance of the two implementations (processing time and scalability)
+under various workloads.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k+kn}{import} \PY{n+nn}{csv}
+         \PY{k+kn}{import} \PY{n+nn}{random}
+         \PY{k+kn}{import} \PY{n+nn}{sys}
+         
+         \PY{k+kn}{import} \PY{n+nn}{numpy}
+         \PY{k+kn}{import} \PY{n+nn}{os}  \PY{c+c1}{\PYZsh{} We need this module}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}\PY{p}{;}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets}\PY{n+nn}{.}\PY{n+nn}{samples\PYZus{}generator} \PY{k}{import} \PY{n}{make\PYZus{}blobs}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} for plot styling}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{seaborn\PYZhy{}whitegrid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{fig\PYZus{}width} \PY{o}{=} \PY{l+m+mi}{12}
+         \PY{n}{fig\PYZus{}height} \PY{o}{=} \PY{l+m+mi}{10}
+         
+         \PY{c+c1}{\PYZsh{}Samples}
+         \PY{n}{N\PYZus{}SAMPLES} \PY{o}{=} \PY{l+m+mi}{100000}
+         
+         \PY{c+c1}{\PYZsh{} Get path of the current dir, then use it to create paths:}
+         \PY{n}{CURRENT\PYZus{}DIR}        \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{dirname}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{abspath}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{flink\PYZus{}k\PYZhy{}means.ipynb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{points\PYZus{}path}        \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{CURRENT\PYZus{}DIR}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{files/input/points\PYZus{}100000.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{centroids\PYZus{}path}     \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{CURRENT\PYZus{}DIR}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{files/input/centroids.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{new\PYZus{}points\PYZus{}path}    \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{CURRENT\PYZus{}DIR}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{files/output/new\PYZus{}points.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{new\PYZus{}centroids\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{CURRENT\PYZus{}DIR}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{files/output/new\PYZus{}centroids.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{objval\PYZus{}path}        \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{CURRENT\PYZus{}DIR}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{files/output/objfun.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{initial-dataset}{%
+\section{Initial dataset}\label{initial-dataset}}
+
+    \hypertarget{points-in-the-initial-dataset}{%
+\subsection{Points in the initial
+dataset}\label{points-in-the-initial-dataset}}
+
+\begin{itemize}
+\tightlist
+\item
+  dataset of 100.000 points, randomly generated
+\item
+  points are already divided into clusters
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X,Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{points\PYZus{}path}\PY{p}{)} \PY{k}{as} \PY{n}{csvfile}\PY{p}{:}
+             \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{csvfile}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{row} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{reader}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{if}\PY{p}{(}\PY{n}{i} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{break}
+                     
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total points: }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n+nb}{format}\PY{p}{(}\PY{n}{N\PYZus{}SAMPLES}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+X,Y
+-6.030655427827744 7.010503797942845
+1.44888315638322 5.649841687086858
+5.2113349965879365 5.111332892148602
+8.169049731285268 -3.0299071227666934
+-6.7566857968809675 0.5102043195659359
+-6.565675459872967 0.2973336285548338
+-5.0923491919544706 7.200424641047177
+-9.28377274405066 -4.471524504982716
+8.885145705359779 -2.2490604605130797
+-10.541767848895473 -5.948723542953223
+-5.506572521654158 8.263395622666037
+Total points: 100,000
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{x} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{N\PYZus{}SAMPLES}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{N\PYZus{}SAMPLES}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Read the dataset from the CVS file}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{points\PYZus{}path}\PY{p}{)} \PY{k}{as} \PY{n}{csvfile}\PY{p}{:}
+             \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{csvfile}\PY{p}{)}
+             \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                 \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{n}{i}\PY{o}{=}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}
+         
+         \PY{c+c1}{\PYZsh{} Plot the read dataset}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{n}{fig\PYZus{}width}\PY{p}{,} \PY{n}{fig\PYZus{}height}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=} \PY{l+m+mi}{80}\PY{p}{,} \PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{initial-centroids}{%
+\subsection{Initial centroids}\label{initial-centroids}}
+
+Initial centroids can be - randomly placed at runtime - recreated if too
+close with the ``recompnearest'' input parameter - read from the input
+file
+
+    \hypertarget{add-header-row-to-centroids}{%
+\subparagraph{Add header row to
+centroids}\label{add-header-row-to-centroids}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{centroids\PYZus{}path}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r+}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{content} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+             \PY{n}{f}\PY{o}{.}\PY{n}{seek}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{f}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster,X,Y}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{content}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster,X,Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{centroids} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{centroids\PYZus{}path}\PY{p}{)} \PY{k}{as} \PY{n}{csvfile}\PY{p}{:}
+             \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{csvfile}\PY{p}{)}
+             \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{centroids} \PY{o}{=} \PY{n}{centroids} \PY{o}{+} \PY{l+m+mi}{1}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total centroids: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{centroids}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Cluster,X,Y
+0 -6.4996390976529295 -4.547264999578333
+1 6.534180113636655 -2.488343051409096
+2 9.383963677452972 13.631449459607751
+3 -9.500499218343863 5.884396961266557
+4 8.890352795564372 13.027356262944053
+5 9.93075300901236 6.052005456020023
+6 13.034049573603387 -1.1265485014145966
+7 -11.622709868541028 5.462999295973049
+Total centroids: 8
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{x} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{centroids}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{centroids}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Read the dataset from the CVS file}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{centroids\PYZus{}path}\PY{p}{)} \PY{k}{as} \PY{n}{csvfile}\PY{p}{:}
+             \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{csvfile}\PY{p}{)}
+             \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                 \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{n}{i}\PY{o}{=}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}
+         
+         \PY{c+c1}{\PYZsh{}Plot the read dataset}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{n}{fig\PYZus{}width}\PY{p}{,} \PY{n}{fig\PYZus{}height}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=} \PY{l+m+mi}{80}\PY{p}{,} \PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{run-flink}{%
+\section{Run Flink}\label{run-flink}}
+
+    \hypertarget{result-dataset}{%
+\section{Result dataset}\label{result-dataset}}
+
+    \hypertarget{add-header-row-to-files}{%
+\subparagraph{Add header row to files}\label{add-header-row-to-files}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{new\PYZus{}centroids\PYZus{}path}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r+}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{content} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+             \PY{n}{f}\PY{o}{.}\PY{n}{seek}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{f}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster,X,Y}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{content}\PY{p}{)}
+             
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{new\PYZus{}points\PYZus{}path}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r+}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{content} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+             \PY{n}{f}\PY{o}{.}\PY{n}{seek}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{f}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster,X,Y}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{content}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{plot-new-centroids}{%
+\subsection{Plot new centroids}\label{plot-new-centroids}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster,X,Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{centroids} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{new\PYZus{}centroids\PYZus{}path}\PY{p}{)} \PY{k}{as} \PY{n}{csvfile}\PY{p}{:}
+             \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{csvfile}\PY{p}{)}
+             \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{centroids} \PY{o}{=} \PY{n}{centroids} \PY{o}{+} \PY{l+m+mi}{1}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total centroids: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{centroids}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Cluster,X,Y
+0 -6.018177389534398 -5.970154788636278
+1 6.813505758850471 -2.487312645046373
+3 -5.415092157412377 6.989688821546183
+4 1.1210729942909556 6.365985074051813
+5 4.724413665164045 5.2708556118124825
+6 8.076399852912724 -2.338271813271596
+7 -6.680309422780709 1.8805588389912962
+Total centroids: 7
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{x} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{centroids}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{centroids}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Read the dataset from the CVS file}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{new\PYZus{}centroids\PYZus{}path}\PY{p}{)} \PY{k}{as} \PY{n}{csvfile}\PY{p}{:}
+             \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{csvfile}\PY{p}{)}
+             \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                 \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{c+c1}{\PYZsh{}print(x[i], y[i])}
+                 \PY{n}{i}\PY{o}{=}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}
+                 
+         \PY{c+c1}{\PYZsh{}Plot the read dataset}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{n}{fig\PYZus{}width}\PY{p}{,} \PY{n}{fig\PYZus{}height}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=} \PY{l+m+mi}{80}\PY{p}{,} \PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{plot-points-new-centroids}{%
+\subsection{Plot points + new
+centroids}\label{plot-points-new-centroids}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{x} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{N\PYZus{}SAMPLES}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{N\PYZus{}SAMPLES}\PY{p}{)}
+         \PY{n}{c} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{N\PYZus{}SAMPLES}\PY{p}{)}
+         \PY{n}{cx} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+         \PY{n}{cy} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+         \PY{n}{cc} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{n}{fig\PYZus{}width}\PY{p}{,} \PY{n}{fig\PYZus{}height}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=} \PY{l+m+mi}{80}\PY{p}{,} \PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Read the new centroids from the CVS file}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{new\PYZus{}centroids\PYZus{}path}\PY{p}{)} \PY{k}{as} \PY{n}{csvfile}\PY{p}{:}
+             \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{csvfile}\PY{p}{)}
+             \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                 \PY{n}{cx}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{cy}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{cc}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Read the new dataset from the CVS file}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{new\PYZus{}points\PYZus{}path}\PY{p}{)} \PY{k}{as} \PY{n}{csvfile}\PY{p}{:}
+             \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{csvfile}\PY{p}{)}
+             \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                 \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{n}{c}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{c+c1}{\PYZsh{} print(x[i], y[i])}
+                 \PY{n}{i} \PY{o}{=} \PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}
+         
+         \PY{n}{minK} \PY{o}{=} \PY{p}{(}\PY{n+nb}{int}\PY{p}{)}\PY{p}{(}\PY{n}{c}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{maxK} \PY{o}{=} \PY{p}{(}\PY{n+nb}{int}\PY{p}{)}\PY{p}{(}\PY{n}{c}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{n}{minK}\PY{p}{,} \PY{n}{maxK}\PY{p}{)}
+         
+         \PY{n}{k} \PY{o}{=} \PY{p}{(}\PY{n+nb}{int}\PY{p}{)}\PY{p}{(}\PY{n}{maxK} \PY{o}{\PYZhy{}} \PY{n}{minK} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} plot the points for each cluster with a different color}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{minK}\PY{p}{,} \PY{n}{maxK}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+             \PY{n}{x2} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+             \PY{n}{y2} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N\PYZus{}SAMPLES}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{c}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{==} \PY{n}{i}\PY{p}{:}
+                     \PY{n}{x2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{y2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Plot the read dataset}
+             \PY{n}{color1} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x2}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{y2}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{color1}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                 
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{maxK}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+             \PY{n}{color2} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{p}{)}
+             \PY{k}{try}\PY{p}{:}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{cx}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{cy}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{color2}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{n}{color2}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+             \PY{k}{except}\PY{p}{:}
+                 \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{No: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{i}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{objval\PYZus{}path}\PY{p}{)} \PY{k}{as} \PY{n}{objval\PYZus{}file}\PY{p}{:}
+             \PY{n}{objval} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{objval\PYZus{}file}\PY{o}{.}\PY{n}{readline}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Obj val: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{objval}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0 7
+No: 7
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Obj val: 567526.857239
+
+    \end{Verbatim}
+
+    \hypertarget{compute-objective-function}{%
+\subsection{Compute objective
+function}\label{compute-objective-function}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{k+kn}{import} \PY{n+nn}{math}
+         
+         \PY{c+c1}{\PYZsh{} read the clusters}
+         \PY{n}{clusters} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{new\PYZus{}centroids\PYZus{}path}\PY{p}{)} \PY{k}{as} \PY{n}{csvfile}\PY{p}{:}
+             \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{csvfile}\PY{p}{)}
+             \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                 \PY{n}{clusters}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n+nb}{float}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n+nb}{float}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Clusters: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{clusters}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{points} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{new\PYZus{}points\PYZus{}path}\PY{p}{)} \PY{k}{as} \PY{n}{csvfile}\PY{p}{:}
+             \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{csvfile}\PY{p}{)}
+             \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                 \PY{n}{cp} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{xp} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{yp} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{points}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{cp}\PY{p}{,} \PY{n}{xp}\PY{p}{,} \PY{n}{yp}\PY{p}{]}\PY{p}{)}
+                 
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Points: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{points}\PY{p}{)}\PY{p}{)}
+                 
+         \PY{c+c1}{\PYZsh{} compute the distances and the objective function      }
+         \PY{n}{distances} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+         \PY{k}{for} \PY{n}{point} \PY{o+ow}{in} \PY{n}{points}\PY{p}{:}
+             \PY{k}{for} \PY{n}{cluster} \PY{o+ow}{in} \PY{n}{clusters}\PY{p}{:}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{cluster}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{n}{point}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{distance} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{n}{point}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{cluster}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{point}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{cluster}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} 
+                                          \PY{o}{+} \PY{p}{(}\PY{n}{point}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{cluster}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{point}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{cluster}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                     \PY{n}{distance} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{pow}\PY{p}{(}\PY{n}{distance}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+                     \PY{n}{distances}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{distance}\PY{p}{)}
+         
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Distances: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{distances}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Obj function: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{distances}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Clusters: 7
+Points: 100000 
+Distances: 100000 
+Obj function: 567526.857239
+
+    \end{Verbatim}
+
+    \hypertarget{create-new-dataset}{%
+\section{Create new dataset}\label{create-new-dataset}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{NEW\PYZus{}SAMPLES}\PY{o}{=}\PY{l+m+mi}{100000}
+         \PY{n}{NEW\PYZus{}CENTERS}\PY{o}{=}\PY{l+m+mi}{8}
+         \PY{c+c1}{\PYZsh{}X, y\PYZus{}true = make\PYZus{}blobs(n\PYZus{}samples=N\PYZus{}SAMPLES, centers=4, cluster\PYZus{}std=0.60, random\PYZus{}state=3320)}
+         \PY{n}{X}\PY{p}{,} \PY{n}{y\PYZus{}true} \PY{o}{=} \PY{n}{make\PYZus{}blobs}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{n}{NEW\PYZus{}SAMPLES}\PY{p}{,} \PY{n}{centers}\PY{o}{=}\PY{n}{NEW\PYZus{}CENTERS}\PY{p}{,} \PY{n}{cluster\PYZus{}std}\PY{o}{=}\PY{l+m+mf}{0.60}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{n}{fig\PYZus{}width}\PY{p}{,} \PY{n}{fig\PYZus{}height}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=} \PY{l+m+mi}{80}\PY{p}{,} \PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{save-dataset-to-file}{%
+\subsection{Save dataset to file}\label{save-dataset-to-file}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{new\PYZus{}points\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{CURRENT\PYZus{}DIR}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{files/input/points\PYZus{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{NEW\PYZus{}SAMPLES}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{new\PYZus{}points\PYZus{}path}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{csvfile}\PY{p}{:}
+             \PY{n}{fieldnames} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{writer} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictWriter}\PY{p}{(}\PY{n}{csvfile}\PY{p}{,} \PY{n}{fieldnames}\PY{o}{=}\PY{n}{fieldnames}\PY{p}{)}
+         
+             \PY{n}{writer}\PY{o}{.}\PY{n}{writeheader}\PY{p}{(}\PY{p}{)}
+             \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{NEW\PYZus{}SAMPLES}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{writer}\PY{o}{.}\PY{n}{writerow}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{X}\PY{p}{[}\PY{n}{x}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{X}\PY{p}{[}\PY{n}{x}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \hypertarget{results}{%
+\section{Results}\label{results}}
+
+\hypertarget{objective-function-value}{%
+\subsubsection{Objective function
+value}\label{objective-function-value}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Relation between number of centroids and obj function value
+\item
+  Relation between initial distance of centroids and obj function value
+\item
+  Relation between number of iterations and objective function value
+\end{enumerate}
+
+\hypertarget{execution-time}{%
+\subsubsection{Execution time}\label{execution-time}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Relation between number of centroids and execution time
+\item
+  Relation between number of points and the execution time and
+  parallelism
+\end{enumerate}
+
+    \hypertarget{relation-between-number-of-centroids-and-obj-function-value-script-1}{%
+\subsection{1. Relation between number of centroids and obj function
+value (script
+1)}\label{relation-between-number-of-centroids-and-obj-function-value-script-1}}
+
+We want to analyze the relation between the number of centroids we use
+and the computed objective function value - \textbf{Add one centroid at
+a time, randomly generated, {[}1, 20{]} ➡ -numcentroids 1..20} - The
+script is executed 5 times for every centroid and the average value is
+taken - Fixed input dataset with 8 centers and 100.000 points - 10
+iterations ➡ -iterations 10 - No custom aggregator convergence ➡
+-custconvergence false - Parallelization set to 4 ➡ -p 4 - Recomputing
+of nearest centroid disable ➡ -recompnearest 0
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}98}]:} \PY{n}{obj\PYZus{}mean\PYZus{}vals} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+         \PY{n}{mink} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{maxk} \PY{o}{=} \PY{l+m+mi}{21}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{mink}\PY{p}{,} \PY{n}{maxk}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fixed\PYZus{}path\PYZus{}objfun} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{CURRENT\PYZus{}DIR}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{script\PYZus{}results/script\PYZus{}1/results\PYZus{}objfun\PYZus{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{objval\PYZus{}iter} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+             \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{fixed\PYZus{}path\PYZus{}objfun}\PY{p}{)} \PY{k}{as} \PY{n}{csvfile}\PY{p}{:}
+                 \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{csvfile}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                     \PY{n+nb}{iter} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{objval} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{objval}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{objval\PYZus{}iter}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{objval}\PY{p}{)}
+                     
+             \PY{n}{obj\PYZus{}mean\PYZus{}vals}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{numpy}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{objval\PYZus{}iter}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         
+         \PY{k+kn}{from} \PY{n+nn}{tabulate} \PY{k}{import} \PY{n}{tabulate}
+         \PY{n+nb}{print} \PY{p}{(}\PY{n}{tabulate}\PY{p}{(}\PY{n}{obj\PYZus{}mean\PYZus{}vals}\PY{p}{,} \PY{n}{headers}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of centroids}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Obj Function Mean Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{x\PYZus{}val} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{obj\PYZus{}mean\PYZus{}vals}\PY{p}{]}
+         \PY{n}{y\PYZus{}val} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{obj\PYZus{}mean\PYZus{}vals}\PY{p}{]}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{n}{fig\PYZus{}width}\PY{p}{,} \PY{n}{fig\PYZus{}height}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=} \PY{l+m+mi}{80}\PY{p}{,} \PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}val}\PY{p}{,}\PY{n}{y\PYZus{}val}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of centroids \PYZhy{} Obj function mean value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} of centroids}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Obj value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  Number of centroids    Obj Function Mean Value
+---------------------  -------------------------
+                    1                5.90974e+06
+                    2                3.30358e+06
+                    3                1.99299e+06
+                    4                1.32618e+06
+                    5           956840
+                    6           729461
+                    7           470450
+                    8           247065
+                    9           332966
+                   10           343733
+                   11           187838
+                   12           161924
+                   13           168307
+                   14           132847
+                   15           135287
+                   16           104812
+                   17           111988
+                   18           105427
+                   19           116363
+                   20            98575.2
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{the-value-of-the-objective-function-will-decrease-increasing-the-number-of-centroids-until-a-fixed-point-is-reached}{%
+\paragraph{The value of the objective function will decrease, increasing
+the number of centroids until a fixed point is
+reached}\label{the-value-of-the-objective-function-will-decrease-increasing-the-number-of-centroids-until-a-fixed-point-is-reached}}
+
+As we can see the objective function value decreases as the number of
+centroid increases until a fixed point is reached and the objective
+function value will remain constant even if we add more centroids.
+
+    \hypertarget{relation-between-initial-distance-of-centroids-and-obj-function-value-script-2}{%
+\subsection{2. Relation between initial distance of centroids and obj
+function value (script
+2)}\label{relation-between-initial-distance-of-centroids-and-obj-function-value-script-2}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Increasing recomputing of nearest centroid ➡ -recompnearest
+  {[}0, 10, 20, \ldots{}, 100{]}}
+\item
+  The script is executed 5 times for every recompnearest and the average
+  value is taken
+\item
+  Fixed input dataset with 8 centers and 100.000 points
+\item
+  8 randomly centroids
+\item
+  Max iterations ➡ -iterations 1
+\item
+  No custom aggregator convergence ➡ -custconvergence false
+\item
+  Parallelization set to 4 ➡ -p 1
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}99}]:} \PY{n}{recomp} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{,}\PY{l+m+mi}{70}\PY{p}{,}\PY{l+m+mi}{80}\PY{p}{,}\PY{l+m+mi}{90}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{]}
+         
+         \PY{n}{obj\PYZus{}mean\PYZus{}vals} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+         \PY{n}{mink} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{maxk} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{recomp}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{mink}\PY{p}{,} \PY{n}{maxk}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fixed\PYZus{}path\PYZus{}objfun} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{CURRENT\PYZus{}DIR}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{script\PYZus{}results/script\PYZus{}2/results\PYZus{}objfun\PYZus{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{objval\PYZus{}iter} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+             \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{fixed\PYZus{}path\PYZus{}objfun}\PY{p}{)} \PY{k}{as} \PY{n}{csvfile}\PY{p}{:}
+                 \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{csvfile}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                     \PY{n+nb}{iter} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{objval} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{objval}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{objval\PYZus{}iter}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{objval}\PY{p}{)}
+                     
+             \PY{n}{obj\PYZus{}mean\PYZus{}vals}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{numpy}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{objval\PYZus{}iter}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{x\PYZus{}val} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{obj\PYZus{}mean\PYZus{}vals}\PY{p}{]}
+         \PY{n}{y\PYZus{}val} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{obj\PYZus{}mean\PYZus{}vals}\PY{p}{]}
+         
+         \PY{k+kn}{from} \PY{n+nn}{tabulate} \PY{k}{import} \PY{n}{tabulate}
+         \PY{n+nb}{print} \PY{p}{(}\PY{n}{tabulate}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Recomp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{recomp}\PY{p}{,}
+                          \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Obj}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{y\PYZus{}val}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{headers}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recomp nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Obj Function Mean Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{n}{fig\PYZus{}width}\PY{p}{,} \PY{n}{fig\PYZus{}height}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=} \PY{l+m+mi}{80}\PY{p}{,} \PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{x\PYZus{}val}\PY{p}{,} \PY{n}{recomp}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}val}\PY{p}{,}\PY{n}{y\PYZus{}val}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recompute Nearest \PYZhy{} Obj Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} recompute nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Obj fun value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  Recomp nearest    Obj Function Mean Value
+----------------  -------------------------
+               0                     659533
+              10                     611001
+              20                     618168
+              30                     819744
+              40                     547630
+              50                     660676
+              60                     666810
+              70                     553158
+              80                     568986
+              90                     520001
+             100                     649310
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As we can see the objective function values does not decrease as the
+number of recomputation increases, due to the nature of the
+recomputation implemented. Indeed, the recomputation of the nearest is
+done regenerating one point of the nearest couple of points. This method
+even if tries to move points one far from another one it is not
+deterministic because new centroids are randomly generated and so can
+happen that new centroids are close even if they are recomputed a large
+number of times
+
+    \hypertarget{relation-between-number-of-iterations-and-objective-function-value-script-3}{%
+\subsection{3. Relation between number of iterations and objective
+function value (script
+3)}\label{relation-between-number-of-iterations-and-objective-function-value-script-3}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Execute the script with an increasing number of iterations ➡
+  -iterations {[}1, 2, 3, \ldots{}, 15{]}}
+\item
+  The script is executed 5 times for every iteration and the average
+  value is taken
+\item
+  Fixed input dataset with 8 centers and 100.000 points
+\item
+  8 static centroids from file
+\item
+  No custom aggregator convergence ➡ -custconvergence false
+\item
+  Parallelization set to max ➡ -p 1
+\item
+  Recomputing of nearest centroid disable ➡ -recompnearest 0
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}100}]:} \PY{n}{iterations}\PY{o}{=}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}
+          
+          \PY{n}{obj\PYZus{}mean\PYZus{}vals} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+          \PY{n}{mink} \PY{o}{=} \PY{l+m+mi}{1}
+          \PY{n}{maxk} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{iterations}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{mink}\PY{p}{,} \PY{n}{maxk}\PY{p}{)}\PY{p}{:}
+              \PY{n}{fixed\PYZus{}path\PYZus{}objfun} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{CURRENT\PYZus{}DIR}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{script\PYZus{}results/script\PYZus{}3/results\PYZus{}objfun\PYZus{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              
+              \PY{n}{objval\PYZus{}iter} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+              \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{fixed\PYZus{}path\PYZus{}objfun}\PY{p}{)} \PY{k}{as} \PY{n}{csvfile}\PY{p}{:}
+                  \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{csvfile}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                      \PY{n+nb}{iter} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                      \PY{n}{objval} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{objval}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                      \PY{n}{objval\PYZus{}iter}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{objval}\PY{p}{)}
+                      
+              \PY{n}{obj\PYZus{}mean\PYZus{}vals}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{numpy}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{objval\PYZus{}iter}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{x\PYZus{}val} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{obj\PYZus{}mean\PYZus{}vals}\PY{p}{]}
+          \PY{n}{y\PYZus{}val} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{obj\PYZus{}mean\PYZus{}vals}\PY{p}{]}
+          
+          \PY{k+kn}{from} \PY{n+nn}{tabulate} \PY{k}{import} \PY{n}{tabulate}
+          \PY{n+nb}{print} \PY{p}{(}\PY{n}{tabulate}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Iterations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{iterations}\PY{p}{,}
+                           \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Obj}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{y\PYZus{}val}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{headers}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iterations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Obj Function Mean Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{n}{fig\PYZus{}width}\PY{p}{,} \PY{n}{fig\PYZus{}height}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=} \PY{l+m+mi}{80}\PY{p}{,} \PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{x\PYZus{}val}\PY{p}{,} \PY{n}{iterations}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}val}\PY{p}{,}\PY{n}{y\PYZus{}val}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of iterations \PYZhy{} Obj Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} number of iterations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Obj fun value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  Iterations    Obj Function Mean Value
+------------  -------------------------
+           1                     541541
+           2                     308055
+           3                     288017
+           4                     277546
+           5                     270415
+           6                     266614
+           7                     265335
+           8                     265055
+           9                     265002
+          10                     264993
+          11                     264992
+          12                     264992
+          13                     264992
+          14                     264992
+          15                     264992
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The value of the objective function will decrease increasing the number
+of iterations until a fixed status is reached and the obj function value
+does not decrease even if the number of iterations increases
+
+    \hypertarget{relation-between-number-of-centroids-and-execution-time-script-1}{%
+\subsection{4. Relation between number of centroids and execution time
+(script
+1)}\label{relation-between-number-of-centroids-and-execution-time-script-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Add one centroid at a time, randomly generated {[}1, 20{]} ➡
+  -numcentroids 1..20}
+\item
+  The script is executed 5 times for every centroid and the average
+  value is taken
+\item
+  Fixed input dataset with 8 centers
+\item
+  Max iterations ➡ -iterations 100
+\item
+  No custom aggregator convergence ➡ -custconvergence true
+\item
+  Parallelization set to 1 ➡ -p 1
+\item
+  Recomputing of nearest centroid disable ➡ -recompnearest 0
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{num\PYZus{}centroids} \PY{o}{=} \PY{l+m+mi}{20}
+        
+        \PY{n}{obj\PYZus{}mean\PYZus{}vals} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+        \PY{n}{mink} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{n}{maxk} \PY{o}{=} \PY{n}{num\PYZus{}centroids}\PY{o}{+}\PY{l+m+mi}{1}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{mink}\PY{p}{,} \PY{n}{maxk}\PY{p}{)}\PY{p}{:}
+            \PY{n}{fixed\PYZus{}path\PYZus{}objfun} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{CURRENT\PYZus{}DIR}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{script\PYZus{}results/script\PYZus{}1\PYZhy{}2/results\PYZus{}time\PYZus{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            
+            \PY{n}{objval\PYZus{}iter} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+            \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{fixed\PYZus{}path\PYZus{}objfun}\PY{p}{)} \PY{k}{as} \PY{n}{csvfile}\PY{p}{:}
+                \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{csvfile}\PY{p}{)}
+                \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                    \PY{n+nb}{iter} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{objval} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{objval\PYZus{}iter}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{objval}\PY{p}{)}
+                    
+            \PY{n}{obj\PYZus{}mean\PYZus{}vals}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{numpy}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{objval\PYZus{}iter}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        
+        \PY{k+kn}{from} \PY{n+nn}{tabulate} \PY{k}{import} \PY{n}{tabulate}
+        \PY{n+nb}{print} \PY{p}{(}\PY{n}{tabulate}\PY{p}{(}\PY{n}{obj\PYZus{}mean\PYZus{}vals}\PY{p}{,} \PY{n}{headers}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Centroids}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Executione Time [ms]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{x\PYZus{}val} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{obj\PYZus{}mean\PYZus{}vals}\PY{p}{]}
+        \PY{n}{y\PYZus{}val} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{obj\PYZus{}mean\PYZus{}vals}\PY{p}{]}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{n}{fig\PYZus{}width}\PY{p}{,} \PY{n}{fig\PYZus{}height}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=} \PY{l+m+mi}{80}\PY{p}{,} \PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}val}\PY{p}{,}\PY{n}{y\PYZus{}val}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of centroids \PYZhy{} Execution time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} of centroids}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Execution time [ms]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Min value: }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n+nb}{min}\PY{p}{(}\PY{n}{y\PYZus{}val}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Max value: }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n+nb}{max}\PY{p}{(}\PY{n}{y\PYZus{}val}\PY{p}{)}\PY{p}{)}
+        \PY{n}{range\PYZus{}val} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{y\PYZus{}val}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n+nb}{min}\PY{p}{(}\PY{n}{y\PYZus{}val}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Range: }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{range\PYZus{}val}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  Centroids    Executione Time [ms]
+-----------  ----------------------
+          1                  2046.2
+          2                  1808.6
+          3                  2711
+          4                  2106.4
+          5                  2028.8
+          6                  2306
+          7                  1739.2
+          8                  1865
+          9                  1837.4
+         10                  1641
+         11                  1832.2
+         12                  1895.6
+         13                  1765.8
+         14                  1802
+         15                  1729
+         16                  1739.4
+         17                  1682.4
+         18                  1754.6
+         19                  1935.4
+         20                  1906
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Min value: 1641.00
+Max value: 2711.00
+Range: 1070.00
+
+    \end{Verbatim}
+
+    The execution time does not change too much increasing the number of
+centroids. The overhead introduced by Flink is much bigger with respect
+to the increment of time needed to compute the position of more
+centroids and so we can not observe an increment of time when adding
+more centroids
+
+    \hypertarget{relation-between-number-of-points-and-the-execution-time-and-parallelism-script-4}{%
+\subsection{5. Relation between number of points and the execution time
+and parallelism (script
+4)}\label{relation-between-number-of-points-and-the-execution-time-and-parallelism-script-4}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Execute the script with an increasing number of point, from
+  100 to 10.000.000}
+\item
+  The script is executed 5 times for set of points and the average value
+  is taken
+\item
+  Fixed input dataset with 8 centers
+\item
+  Max iterations ➡ -iterations 10
+\item
+  No custom aggregator convergence ➡ -custconvergence false
+\item
+  Parallelization set to max and min ➡ -p 4, -p 1
+\item
+  Recomputing of nearest centroid disable ➡ -recompnearest 0
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{n}{num\PYZus{}of\PYZus{}points} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{10000}\PY{p}{,}\PY{l+m+mi}{100000}\PY{p}{,}\PY{l+m+mi}{1000000}\PY{p}{,}\PY{l+m+mi}{10000000}\PY{p}{]}
+         \PY{n}{obj\PYZus{}mean\PYZus{}vals\PYZus{}4p} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} \PYZhy{}p 4}
+         \PY{n}{obj\PYZus{}mean\PYZus{}vals\PYZus{}1p} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} \PYZhy{}p 1}
+         
+         \PY{n}{mink} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{maxk} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{num\PYZus{}of\PYZus{}points}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{mink}\PY{p}{,} \PY{n}{maxk}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fixed\PYZus{}path\PYZus{}objfun} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{CURRENT\PYZus{}DIR}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{script\PYZus{}results/script\PYZus{}4\PYZhy{}1/results\PYZus{}time\PYZus{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{objval\PYZus{}iter} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+             \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{fixed\PYZus{}path\PYZus{}objfun}\PY{p}{)} \PY{k}{as} \PY{n}{csvfile}\PY{p}{:}
+                 \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{csvfile}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                     \PY{n+nb}{iter} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{objval} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{objval\PYZus{}iter}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{objval}\PY{p}{)}
+                     
+             \PY{n}{obj\PYZus{}mean\PYZus{}vals\PYZus{}4p}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{numpy}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{objval\PYZus{}iter}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{mink}\PY{p}{,} \PY{n}{maxk}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fixed\PYZus{}path\PYZus{}objfun} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{CURRENT\PYZus{}DIR}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{script\PYZus{}results/script\PYZus{}4\PYZhy{}2/results\PYZus{}time\PYZus{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{objval\PYZus{}iter} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+             \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{fixed\PYZus{}path\PYZus{}objfun}\PY{p}{)} \PY{k}{as} \PY{n}{csvfile}\PY{p}{:}
+                 \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{csvfile}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                     \PY{n+nb}{iter} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{objval} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{objval\PYZus{}iter}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{objval}\PY{p}{)}
+                     
+             \PY{n}{obj\PYZus{}mean\PYZus{}vals\PYZus{}1p}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{numpy}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{objval\PYZus{}iter}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{x\PYZus{}val\PYZus{}4p} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{obj\PYZus{}mean\PYZus{}vals\PYZus{}4p}\PY{p}{]}
+         \PY{n}{y\PYZus{}val\PYZus{}4p} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{obj\PYZus{}mean\PYZus{}vals\PYZus{}4p}\PY{p}{]}
+         \PY{n}{x\PYZus{}val\PYZus{}1p} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{obj\PYZus{}mean\PYZus{}vals\PYZus{}1p}\PY{p}{]}
+         \PY{n}{y\PYZus{}val\PYZus{}1p} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{obj\PYZus{}mean\PYZus{}vals\PYZus{}1p}\PY{p}{]}
+         
+         \PY{k+kn}{from} \PY{n+nn}{tabulate} \PY{k}{import} \PY{n}{tabulate}
+         \PY{n+nb}{print} \PY{p}{(}\PY{n}{tabulate}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Iteration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{num\PYZus{}of\PYZus{}points}\PY{p}{,}
+                          \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{4P}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{y\PYZus{}val\PYZus{}4p}\PY{p}{,}
+                          \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{1P}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{y\PYZus{}val\PYZus{}1p}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{headers}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of points}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Executione Time 4P [ms]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Executione Time 1P [ms]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{n}{fig\PYZus{}width}\PY{p}{,} \PY{n}{fig\PYZus{}height}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=} \PY{l+m+mi}{80}\PY{p}{,} \PY{n}{facecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{x\PYZus{}val\PYZus{}4p}\PY{p}{,} \PY{n}{num\PYZus{}of\PYZus{}points}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{x\PYZus{}val\PYZus{}1p}\PY{p}{,} \PY{n}{num\PYZus{}of\PYZus{}points}\PY{p}{)}
+         \PY{n}{line\PYZus{}4p}\PY{p}{,} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}val\PYZus{}4p}\PY{p}{,}\PY{n}{y\PYZus{}val\PYZus{}4p}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4P}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{line\PYZus{}2p}\PY{p}{,} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}val\PYZus{}1p}\PY{p}{,}\PY{n}{y\PYZus{}val\PYZus{}1p}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1P}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{handles}\PY{o}{=}\PY{p}{[}\PY{n}{line\PYZus{}4p}\PY{p}{,} \PY{n}{line\PYZus{}2p}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of points \PYZhy{} Execution time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} of points}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Execution time [ms]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  Number of points    Executione Time 4P [ms]    Executione Time 1P [ms]
+------------------  -------------------------  -------------------------
+               100                     2766.6                      711.2
+              1000                     2737.2                      599.8
+             10000                     2734.6                      846
+            100000                     4021.2                     2263
+           1000000                    12152.6                    15155.4
+          10000000                    90796.6                   150097
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{the-execution-time-will-increase-increasing-the-number-of-points.-the-execution-time-should-be-lower-using-a-higher-parallelism}{%
+\subsubsection{The execution time will increase, increasing the number
+of points. The execution time should be lower using a higher
+parallelism}\label{the-execution-time-will-increase-increasing-the-number-of-points.-the-execution-time-should-be-lower-using-a-higher-parallelism}}
+
+As we can see the execution time increases with the number of points.
+Between 100 and 100.000 points the execution is faster using a
+parallelism of 1 while from 1.000.000 on the execution is faster using a
+parallelism of 4.
+
+Parallelizing an application causes overhead, and data has to be
+distributed and shared between processes and threads. In particular,
+Flink distributes data across TaskManager and so starting and
+coordinating task is an expensive operation.
+
+For these reasons the execution with a parallelism higher than 1 can be
+faster when scaling a large application on multiple machines while in
+this case the overhead caused by the data distribution and task
+coordination is not negligeable
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
